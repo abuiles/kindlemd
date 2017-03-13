@@ -17,9 +17,9 @@ module Kindlemd
 
     def owns?(highlight)
       if next_chapter
-        highlight.startLocation.between?(location, next_chapter)
+        highlight.location.between?(location, next_chapter)
       else
-        highlight.startLocation >= location
+        highlight.location >= location
       end
     end
 

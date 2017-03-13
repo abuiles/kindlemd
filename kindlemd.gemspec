@@ -35,4 +35,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry", "~> 0.10.4"
 
   spec.add_dependency "kindle-highlights", "~> 1.0.2"
+  spec.add_dependency "hashie", "~> 3.5.5"
 end

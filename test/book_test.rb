@@ -1,8 +1,6 @@
 require 'test_helper'
-require 'pry'
 
 class BookTest < Minitest::Test
-
   def chapters
     [
       {
@@ -31,49 +29,49 @@ class BookTest < Minitest::Test
   def highlights
     [
       {
-        "asin"=>"B01C5MZGS6",
-        "highlight"=>"First.",
-        "startLocation"=>105,
-        "endLocation"=>105,
-        "timestamp"=>1487747184000
+        'asin' => 'B01C5MZGS6',
+        'highlight' => 'First.',
+        'startLocation' => 15750,
+        'endLocation' => 15750,
+        'timestamp' => 1_487_747_184_000
       },
       {
-        "asin"=>"B01C5MZGS6",
-        "highlight"=>"Second",
-        "startLocation"=>327,
-        "endLocation"=>330,
-        "timestamp"=>1487747184000
+        'asin' => 'B01C5MZGS6',
+        'highlight' => 'Second',
+        'startLocation' => 49050,
+        'endLocation' => 49050,
+        'timestamp' => 1_487_747_184_000
       },
       {
-        "asin"=>"B01C5MZGS6",
-        "highlight"=>"Fourth.",
-        "startLocation"=>889,
-        "endLocation"=>990,
-        "timestamp"=>1487747184000
+        'asin' => 'B01C5MZGS6',
+        'highlight' => 'Fourth.',
+        'startLocation' => 133350,
+        'endLocation' => 133350,
+        'timestamp' => 1_487_747_184_000
       },
       {
-        "asin"=>"B01C5MZGS6",
-        "highlight"=>"Fourth Delta.",
-        "startLocation"=>900,
-        "endLocation"=>990,
-        "timestamp"=>1487747184000
+        'asin' => 'B01C5MZGS6',
+        'highlight' => 'Fourth Delta.',
+        'startLocation' => 135000,
+        'endLocation' => 135000,
+        'timestamp' => 1_487_747_184_000
       },
       {
-        "asin"=>"B01C5MZGS6",
-        "highlight"=>"Third.",
-        "startLocation"=>670,
-        "endLocation"=>690,
-        "timestamp"=>1487747184000
+        'asin' => 'B01C5MZGS6',
+        'highlight' => 'Third.',
+        'startLocation' => 100500,
+        'endLocation' => 100500,
+        'timestamp' => 1_487_747_184_000
       }
-    ].sort{ |a,b|
-      a["startLocation"] <=> b["startLocation"]
-    }.map{ |highlight|
+    ].sort do |a, b|
+      a['startLocation'] <=> b['startLocation']
+    end.map do |highlight|
       Kindlemd::Highlight.new(highlight)
-    }
+    end
   end
 
   def test_that_it_calls_highlights_for
-    book = Kindlemd::Book.new("What works", chapters)
+    book = Kindlemd::Book.new('What works', chapters)
     book.highlights = highlights
 
     first = book.chapters[0]
@@ -88,10 +86,11 @@ class BookTest < Minitest::Test
   end
 
   def test_that_it_generates_md
-    book = Kindlemd::Book.new("What works", chapters)
+    book = Kindlemd::Book.new('What works', chapters)
     book.highlights = highlights
 
-    sample = File.read('test/sample.md')
+    sample = File.read('test/fixtures/sample.md')
+    File.write('test/fixtures/out.md', book.to_md)
 
     assert_equal sample, book.to_md
   end

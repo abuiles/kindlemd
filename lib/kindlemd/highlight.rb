@@ -1,5 +1,6 @@
 require 'kindle_highlights'
 require 'hashie'
+require 'pry'
 
 module Kindlemd
   class Highlight < Hashie::Mash
@@ -12,11 +13,20 @@ module Kindlemd
     end
 
     def <=>(anOther)
-      startLocation <=> anOther.startLocation
+      location <=> anOther.location
     end
 
     def to_markdown
-      "> #{highlight}"
+      "---\n\n> #{highlight}\n\n---\n#{link}"
+    end
+
+    def link
+      "[Read more at location #{location}](kindle://book?action=open&asin=#{asin}&location=#{location})"
+    end
+
+    def location
+      # https://www.amazon.com/forum/kindle/Tx2S4K44LSXEWRI?_encoding=UTF8&cdForum=Fx1D7SY3BVSESG
+      (startLocation / 150.0).ceil
     end
   end
 end

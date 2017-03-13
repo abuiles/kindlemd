@@ -22,6 +22,7 @@ module Kindlemd
       chapters.each do |chapter|
         # meee
         @highlights.each do |highlight|
+          highlight.book = self
           chapter.add_highlight(highlight)
         end
       end
