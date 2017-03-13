@@ -1,34 +1,67 @@
+require 'set'
+require 'hashie'
+
 module Kindlemd
-  class Chapter
-    # Receives a list of chapters in the form of {name:, position}:
+  class Chapter < Hashie::Mash
+    def highlights
+      @highlights ||= SortedSet.new
+    end
+
+    def add_highlight(highlight)
+      return false unless owns?(highlight)
+
+      highlights.add(highlight)
+      highlight.chapter = self
+      true
+    end
+
+    def owns?(highlight)
+      if next_chapter
+        highlight.startLocation.between?(location, next_chapter)
+      else
+        highlight.startLocation >= location
+      end
+    end
+
+    def to_markdown
+      nodes = ["## #{name}"]
+
+      highlights.each do |highlight|
+        nodes.push(highlight.to_markdown)
+      end
+
+      nodes
+    end
+
+    # Receives a list of chapters in the form of {name:, location}:
     # chapters = [
     #   {
     #     name: 'The promise of Behavioral Design',
-    #     position: 105
+    #     location: 105
     #   },
     #   {
     #     name: 'Part One: The problem',
-    #     position: 324
+    #     location: 324
     #   }]
-
+    #
     # Returns a list of normalized chapters, adding the "next" and "previous" chapter.
 
     # chapters = [
     #   {
     #     name: 'The promise of Behavioral Design',
-    #     position: 105,
+    #     location: 105,
     #     next: 324,
     #     previous: nil
     #   },
     #   {
     #     name: 'Part One: The problem',
-    #     position: 324,
+    #     location: 324,
     #     previous: 105,
     #     next: 328
     #   }]
     def  self.normalize(chapters)
       enum = chapters.sort{ |c,d|
-        c[:position] <=> d[:position]
+        c[:location] <=> d[:location]
       }.to_enum
 
       searching = true
@@ -37,8 +70,8 @@ module Kindlemd
         begin
           chapter = enum.next
           next_chapter = enum.peek
-          chapter[:next] = next_chapter[:position]
-          next_chapter[:previous] = chapter[:position]
+          chapter[:next_chapter] = next_chapter[:location]
+          next_chapter[:previous] = chapter[:location]
         rescue StopIteration
           searching = false
         end
