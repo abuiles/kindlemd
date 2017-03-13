@@ -125,6 +125,6 @@ class ChapterTest < Minitest::Test
       "---\n\n> mundo\n\n---\n[Read more at location 11](kindle://book?action=open&asin=&location=11)"
     ]
 
-    assert_equal expected, chapter.to_markdown
+    assert_equal expected, chapter.to_md
   end
 end

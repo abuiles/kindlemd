@@ -34,9 +34,9 @@ module Kindlemd
 
       document.nodes.each do |node|
         if node.is_a?(Chapter)
-          markdown = markdown + node.to_markdown
+          markdown = markdown + node.to_md
         else
-          markdown.push(node.to_markdown)
+          markdown.push(node.to_md)
         end
       end
 

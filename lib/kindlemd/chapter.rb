@@ -23,11 +23,11 @@ module Kindlemd
       end
     end
 
-    def to_markdown
+    def to_md
       nodes = ["## #{name}"]
 
       highlights.each do |highlight|
-        nodes.push(highlight.to_markdown)
+        nodes.push(highlight.to_md)
       end
 
       nodes

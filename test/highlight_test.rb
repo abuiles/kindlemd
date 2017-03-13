@@ -14,6 +14,6 @@ class HighlightTest < Minitest::Test
 
   def test_that_it_convert_to_md
     highlight = Kindlemd::Highlight.new(highlight: 'hola', startLocation: 1500)
-    assert_equal "---\n\n> hola\n\n---\n[Read more at location 10](kindle://book?action=open&asin=&location=10)", highlight.to_markdown
+    assert_equal "---\n\n> hola\n\n---\n[Read more at location 10](kindle://book?action=open&asin=&location=10)", highlight.to_md
   end
 end

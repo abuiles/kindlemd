@@ -16,7 +16,7 @@ module Kindlemd
       location <=> anOther.location
     end
 
-    def to_markdown
+    def to_md
       "---\n\n> #{highlight}\n\n---\n#{link}"
     end
 
