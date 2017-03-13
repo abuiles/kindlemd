@@ -24,7 +24,7 @@ module Kindlemd
     end
 
     def to_md
-      nodes = ["## #{name}"]
+      nodes = ["## **#{name}**"]
 
       highlights.each do |highlight|
         nodes.push(highlight.to_md)

@@ -120,7 +120,7 @@ class ChapterTest < Minitest::Test
     chapter.add_highlight(highlight)
 
     expected = [
-      "## foo",
+      "## **foo**",
       "---\n\n> hola\n\n---\n[Read more at location 10](kindle://book?action=open&asin=&location=10)",
       "---\n\n> mundo\n\n---\n[Read more at location 11](kindle://book?action=open&asin=&location=11)"
     ]

@@ -1,6 +1,6 @@
 # What works
 
-## The promise of Behavioral Design
+## **The promise of Behavioral Design**
 
 ---
 
@@ -9,7 +9,7 @@
 ---
 [Read more at location 105](kindle://book?action=open&asin=B01C5MZGS6&location=105)
 
-## Part One: The problem
+## **Part One: The problem**
 
 ---
 
@@ -18,7 +18,7 @@
 ---
 [Read more at location 327](kindle://book?action=open&asin=B01C5MZGS6&location=327)
 
-## 2. Something else
+## **2. Something else**
 
 ---
 
@@ -27,7 +27,7 @@
 ---
 [Read more at location 670](kindle://book?action=open&asin=B01C5MZGS6&location=670)
 
-## 3. Third Chapter
+## **3. Third Chapter**
 
 ---
 
